@@ -12,18 +12,18 @@
     <p>Ngày sinh: <input type="date" name="ns" id="ns"></p>
     <p>Giới tính: &nbsp;Nam <input type="radio" name="gt" checked="checked" value="Nam">  
                   &nbsp; Nữ <input type="radio" name="gt" value="Nữ"></p>
-    <p>Sở thích: Bóng chuyền<input type="checkbox" name="bc" id="bc">
+    <!-- <p>Sở thích: Bóng chuyền<input type="checkbox" name="bc" id="bc">
         &nbsp; Bóng rổ <input type="checkbox" name="br" id="br">
         &nbsp; Bóng đá <input type="checkbox" name="bd" id="bd">
-    </p>
+    </p> -->
     <p>Email: <input type="email" name="mail" id="mail" placeholder="example@gmail.com"></p>
     <p>Nơi sinh: 
-        <select name="noisinh" id="noisinh">
-            <option value="1">Vĩnh Long</option>
-            <option value="2">Thành phố Hồ Chí Minh</option>
-            <option value="3">Cần Thơ</option>
-            <option value="4">Đồng Nai</option>
-            <option value="5">Hà Nội</option>
+        <select name="noisinh">
+            <option value="Vĩnh Long">Vĩnh Long</option>
+            <option value="Tp HCM">Thành phố Hồ Chí Minh</option>
+            <option value="Cần Thơ">Cần Thơ</option>
+            <option value="Đồng Nai">Đồng Nai</option>
+            <option value="Hà Nội">Hà Nội</option>
         </select>
     </p>
     <p>User: <input type="text" name="user" id="user"></p>
