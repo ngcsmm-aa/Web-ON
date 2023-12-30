@@ -12,10 +12,10 @@
     <p>Ngày sinh: <input type="date" name="ns" id="ns"></p>
     <p>Giới tính: &nbsp;Nam <input type="radio" name="gt" checked="checked" value="Nam">  
                   &nbsp; Nữ <input type="radio" name="gt" value="Nữ"></p>
-    <!-- <p>Sở thích: Bóng chuyền<input type="checkbox" name="bc" id="bc">
-        &nbsp; Bóng rổ <input type="checkbox" name="br" id="br">
-        &nbsp; Bóng đá <input type="checkbox" name="bd" id="bd">
-    </p> -->
+    <p>Sở thích: Bóng chuyền<input type="checkbox" name="sothich[]" value="Bóng chuyền">
+        &nbsp; Bóng rổ <input type="checkbox" name="sothich[]" value="Bóng rổ">
+        &nbsp; Bóng đá <input type="checkbox" name="sothich[]" value="Bóng đá">
+    </p>
     <p>Email: <input type="email" name="mail" id="mail" placeholder="example@gmail.com"></p>
     <p>Nơi sinh: 
         <select name="noisinh">
@@ -39,9 +39,6 @@
         var email = document.getElementById('mail').value;
         var user = document.getElementById('user').value;
         var pass = document.getElementById('pass').value;
-        var bc = document.getElementById('bc').checked;
-        var br = document.getElementById('br').checked;
-        var bd = document.getElementById('bd').checked;
 
         if (ten === '' || ns === '' || email === '' || user === '' || pass === '') {
             alert('Vui lòng điền đầy đủ thông tin!');
@@ -82,9 +79,10 @@
         }
 
         // Kiểm tra ít nhất 1 sở thích được chọn
-        if (!(bc || br || bd)) {
+        var sothichCheckboxes = document.querySelectorAll('input[name="sothich[]"]:checked');
+        if (sothichCheckboxes.length === 0) {
             alert('Vui lòng chọn ít nhất một sở thích!');
-            event.preventDefault(); // Ngăn chặn sự kiện mặc định của form
+            event.preventDefault();
             return false;
         }
         alert('Nhập thành công!');

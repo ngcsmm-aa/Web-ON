@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['user'];
     $pass = $_POST['pass'];
 
-
+    $sothich = isset($_POST['sothich']) ? implode(', ', $_POST['sothich']) : '';
 
     //Kiểm tra điều kiên nhập để insert vào csdl
     if(
@@ -22,21 +22,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         strlen($pass)>=8 
     ){  //Tạo câu truy vấn để thêm dữ liệu
         // sql = INSERT INTO ten_bang (cot1, cot2, cot3) VALUES ('$ten_bien', '...')
-        $sql = "INSERT INTO thongtin (hoten, ngaysinh, gioitinh, noisinh, email, user, pass) VALUES ('$ht', '$ngaysinh', '$gioitinh','$noisinh','$email', '$user', '$pass')";
+        $sql = "INSERT INTO thongtin (hoten, ngaysinh, gioitinh, noisinh,sothich, email, user, pass) VALUES ('$ht', '$ngaysinh', '$gioitinh','$noisinh','$sothich','$email', '$user', '$pass')";
 
         //Thực hiện truy vấn và kiểm tra kết quả
         if($conn->query($sql) === TRUE){
             // echo "Thêm dữ liệu vào csdl thành công!!!!";
             //Truy vấn lấy tất cả dữ liệu và hiển thị dữ liệu lên bảng
-            $select_all = "SELECT hoten, ngaysinh, gioitinh, noisinh, email, user, pass FROM thongtin";
+            $select_all = "SELECT hoten, ngaysinh, gioitinh, noisinh,sothich, email, user, pass FROM thongtin";
             $result_all = $conn->query($select_all);
             if ($result_all->num_rows>0){
                 //Bắt đầu tạo bảng
                 echo "<br><br><table class='bordered-table' border='1'>";
-                echo "<tr><th>Họ và tên</th> <th>Ngày sinh</th> <th>Giới tính</th> <th>Nơi sinh</th> <th>Email</th> </tr>";
+                echo "<tr>
+                    <th>Họ và tên</th> 
+                    <th>Ngày sinh</th> 
+                    <th>Giới tính</th> 
+                    <th>Nơi sinh</th> 
+                    <th>Sở thích</th> 
+                    <th>Email</th> </tr>";
                 //Duyệt qua từng hàng và in ra thông tin
                 while ($row=$result_all->fetch_assoc()){
-                    echo "<tr><td>". $row["hoten"]. "</td><td>". $row["ngaysinh"]. "</td><td>". $row["gioitinh"]. "</td><td>". $row["noisinh"]. "</td><td>". $row["email"]. "</td></tr>";
+                    echo "<tr>";
+                    echo "<td>" . $row["hoten"] . "</td>";
+                    echo "<td>" . $row["ngaysinh"] . "</td>";
+                    echo "<td>" . $row["gioitinh"] . "</td>";
+                    echo "<td>" . $row["noisinh"] . "</td>";
+                    echo "<td>" . $row["sothich"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "</tr>";
                 }
 
                 echo "</table>";
