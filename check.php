@@ -7,29 +7,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ht = $_POST['ten'];
     $ngaysinh = $_POST['ns'];
     $gioitinh = $_POST['gt'];
-    $sothich1 = isset($_POST['bc']);
-    $sothich2 =  isset($_POST['br']); 
-    $sothich3 =  isset($_POST['bd']);
+    $sothich_bc = isset($_POST['bc']) ? 1 : 0;
+    $sothich_br = isset($_POST['br']) ? 1 : 0; 
+    $sothich_bd = isset($_POST['bd']) ? 1 : 0; 
     $email = $_POST['mail'];
-    $noisinh = $_POST['noisinh'];
+    // $noisinh = $_POST['noisinh'];
     $user = $_POST['user'];
     $pass = $_POST['pass'];
 
 
 
-    //Kiểm tra điều kiên nhập
+    //Kiểm tra điều kiên nhập để insert vào csdl
     if(
         preg_match("/^[\p{L} ]{2,}$/u", $ht) &&
         strtotime($ngaysinh) <=strtotime('-18 years') &&
         filter_var($email,FILTER_VALIDATE_EMAIL) &&
-        strlen($pass)>=8
+        strlen($pass)>=8 &&
+        (isset($sothich_bc) || isset($sothich_br) || isset($sothich_bd))// Ít nhất một sở thích được chọn
     ){  //Tạo câu truy vấn để thêm dữ liệu
         // sql = INSERT INTO ten_bang (cot1, cot2, cot3) VALUES ('$ten_bien', '...')
-        $sql = "INSERT INTO thongtin (hoten, ngaysinh, gioitinh, email) VALUES ('$ht','$ngaysinh', '$gioitinh', '$email')";
+        $sql = "INSERT INTO thongtin (hoten, ngaysinh, gioitinh, sothich_bc, sothich_br, sothich_bd, email, user, pass) VALUES ('$ht', '$ngaysinh', '$gioitinh', $sothich_bc, $sothich_br, $sothich_bd, '$email', '$user', '$pass')";
+
         //Thực hiện truy vấn và kiểm tra kết quả
-        if($conn->query($sql)===TRUE){
-            echo "Nhập thành công!!!!";
+        if($conn->query($sql) === TRUE){
+            echo "Thêm dữ liệu vào csdl thành công!!!!";
+        } else {
+            echo "Lỗi: " . $sql . "<br>" . mysqli_error($conn);
         }
+        
     }
 
 }
