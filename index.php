@@ -1,3 +1,9 @@
+<?php
+    include 'connect.php'; // Kết nối với cơ sở dữ liệu
+    $sql="SELECT * FROM lop";
+    $a=mysqli_query($conn,$sql);                                                                        
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +32,14 @@
             <option value="Hà Nội">Hà Nội</option>
         </select>
     </p>
+
+    <p>Lớp học:
+        <select name="lop">
+            <?php foreach ($a as $row) 
+            echo "<option value='$row[malop]'>$row[ten_lop]</option>"; ?>
+        </select>
+    </p>
+
     <p>User: <input type="text" name="user" id="user"></p>
     <p>Password: <input type="password" name="pass" id="pass"></p>
     <input type="submit" value="Submit">
