@@ -14,7 +14,7 @@
 <body>
     <h3>Form nhập</h3>
     <form action="./check.php" method="post" onsubmit="return validateForm(event)">
-    <p>Họ và tên: <input type="text" name="ten" id="ten"></p>
+    <p>Họ và tên: <input type="text" name="ten" id="ten" required></p>
     <p>Ngày sinh: <input type="date" name="ns" id="ns"></p>
     <p>Giới tính: &nbsp;Nam <input type="radio" name="gt" checked="checked" value="Nam">  
                   &nbsp; Nữ <input type="radio" name="gt" value="Nữ"></p>
@@ -42,6 +42,8 @@
 
     <p>User: <input type="text" name="user" id="user"></p>
     <p>Password: <input type="password" name="pass" id="pass"></p>
+    <p>Hình:  <input type="file" name="img" id="img"></p>
+
     <input type="submit" value="Submit">
     <button type="reset">Reset</button>
 </form>
